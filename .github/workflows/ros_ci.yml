@@ -6,7 +6,7 @@ on:
     branches: [ master ]
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     name: Build and test the project
     steps:
       - name: Checkout
@@ -18,4 +18,5 @@ jobs:
       - name: Build and test
         uses: ichiro-its/ros2-ci@v0.4.0
         with:
+          ros2-distro: dashing
           apt-packages: libc6 libcurl4 libgcc1 libhdf5-103 libqt5core5a libqt5gui5 libqt5widgets5 libstdc++6 ecal
