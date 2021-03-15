@@ -13,13 +13,9 @@ jobs:
         uses: actions/checkout@v2.3.4
       - name: download eCAL
         run: |
-          curl -L -o ecal.deb $(curl -s https://api.github.com/repos/continental/ecal/releases/latest \
-          | grep "ecal_5.8.3-focal_amd64.deb" \
-          | tr -d '\n' | tr -d '\r' \
-          | cut -d'"' -f8)
-      - name: install eCAL deb
-        run: 'sudo dpkg -i ecal.deb'
+          sudo add-apt-repository ppa:ecal/ecal-latest
+          sudo apt-get update
       - name: Build and test
         uses: ichiro-its/ros2-ci@v0.4.0
         with:
-          apt-packages: libc6 libcurl4 libgcc1 libhdf5-103 libqt5core5a libqt5gui5 libqt5widgets5 libstdc++6
+          apt-packages: libc6 libcurl4 libgcc1 libhdf5-103 libqt5core5a libqt5gui5 libqt5widgets5 libstdc++6 ecal-dev
