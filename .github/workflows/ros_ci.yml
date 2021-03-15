@@ -6,16 +6,13 @@ on:
     branches: [ master ]
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     name: Build and test the project
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
-      - name: download eCAL
-        run: |
-          sudo add-apt-repository ppa:ecal/ecal-latest
-          sudo apt-get update
       - name: Build and test
         uses: ichiro-its/ros2-ci@v0.4.0
         with:
-          apt-packages: libc6 libcurl4 libgcc1 libhdf5-103 libqt5core5a libqt5gui5 libqt5widgets5 libstdc++6 ecal
+          ros2-distro: dashing
+          pre-build: sudo add-apt-repository ppa:ecal/ecal-latest && sudo apt-get update && sudo apt-get install ecal
